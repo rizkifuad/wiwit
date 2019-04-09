@@ -1,0 +1,220 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2019-04-09T09:56:26.645Z",
+	"__export_source": "insomnia.desktop.app:v6.3.2",
+	"resources": [
+		{
+			"_id": "wrk_70ff4ad8abc54a2b9ebde65e577eaa2c",
+			"created": 1554774577724,
+			"description": "",
+			"modified": 1554774577724,
+			"name": "Wiwit",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_f14a8f72d4c04e04941c3d54150b05a6",
+			"color": null,
+			"created": 1554774577826,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1554774577826,
+			"modified": 1554774577826,
+			"name": "New Environment",
+			"parentId": "wrk_70ff4ad8abc54a2b9ebde65e577eaa2c",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_151c6b2c04994c85ae70b5b058ee7fd1",
+			"cookies": [],
+			"created": 1554774577836,
+			"modified": 1554774577836,
+			"name": "Default Jar",
+			"parentId": "wrk_70ff4ad8abc54a2b9ebde65e577eaa2c",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_21ff66770a254851b8a7655526843392",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/x-www-form-urlencoded",
+				"params": [
+					{
+						"id": "pair_a21e5cf881e24c638ac45819c0817a03",
+						"name": "username",
+						"value": "rizkix"
+					},
+					{
+						"id": "pair_6ecdccf5f2fc449786f39e10f6cdbdd2",
+						"name": "session_id",
+						"value": "23423432423"
+					},
+					{
+						"id": "pair_e819c9a65d914f489d5b2a90250f9d72",
+						"name": "expense",
+						"value": "30"
+					},
+					{
+						"id": "pair_29ffe7bf4395404ab70f0937d5a4ba95",
+						"name": "salary",
+						"value": "1000000"
+					},
+					{
+						"id": "pair_4c9bcfa3388e47fb86405cfd428a992c",
+						"name": "salary_date",
+						"value": "1"
+					}
+				]
+			},
+			"created": 1554774586788,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_af8dec351bf54c479a1d24291309098d",
+					"name": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1554774586788,
+			"method": "POST",
+			"modified": 1554782778192,
+			"name": "Register",
+			"parameters": [],
+			"parentId": "wrk_70ff4ad8abc54a2b9ebde65e577eaa2c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:4000/register",
+			"_type": "request"
+		},
+		{
+			"_id": "req_4f5116ab7d1b4cbca5d179be90a91c5e",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/x-www-form-urlencoded",
+				"params": [
+					{
+						"id": "pair_e819c9a65d914f489d5b2a90250f9d72",
+						"name": "expense",
+						"value": "170"
+					}
+				]
+			},
+			"created": 1554790667652,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_af8dec351bf54c479a1d24291309098d",
+					"name": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552451088114.5,
+			"method": "POST",
+			"modified": 1554793625633,
+			"name": "Budget Plan",
+			"parameters": [],
+			"parentId": "wrk_70ff4ad8abc54a2b9ebde65e577eaa2c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:4000/budget_plan/950234f5-9857-4ed0-8aa7-32f922bf6651",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bcaed97899144b13abf7148a945cc327",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/x-www-form-urlencoded",
+				"params": [
+					{
+						"id": "pair_4c9bcfa3388e47fb86405cfd428a992c",
+						"name": "amount",
+						"value": "2000"
+					},
+					{
+						"id": "pair_905553e89cc247bb97265bfd7da607e0",
+						"name": "",
+						"value": ""
+					}
+				]
+			},
+			"created": 1554793614701,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_af8dec351bf54c479a1d24291309098d",
+					"name": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1551289338777.75,
+			"method": "POST",
+			"modified": 1554802027972,
+			"name": "Check Expense",
+			"parameters": [],
+			"parentId": "wrk_70ff4ad8abc54a2b9ebde65e577eaa2c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:4000/expense/check/950234f5-9857-4ed0-8aa7-32f922bf6651",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f0b2851554b04a7bbcd120716ab221f9",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/x-www-form-urlencoded",
+				"params": [
+					{
+						"id": "pair_4c9bcfa3388e47fb86405cfd428a992c",
+						"name": "amount",
+						"value": "2000"
+					},
+					{
+						"id": "pair_905553e89cc247bb97265bfd7da607e0",
+						"name": "type",
+						"value": "food"
+					}
+				]
+			},
+			"created": 1554802128512,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_af8dec351bf54c479a1d24291309098d",
+					"name": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1550708464109.375,
+			"method": "POST",
+			"modified": 1554802209273,
+			"name": "Add Expense",
+			"parameters": [],
+			"parentId": "wrk_70ff4ad8abc54a2b9ebde65e577eaa2c",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:4000/expense/950234f5-9857-4ed0-8aa7-32f922bf6651",
+			"_type": "request"
+		}
+	]
+}

@@ -1,0 +1,22 @@
+{
+    "debug": true,
+    "transport": {
+        "http": {
+            "address": ":4000"
+        },
+        "grpc": {
+            "address": ":5555"
+        }
+    },
+    "context":{
+        "timeout":2
+    },
+    "database": {
+        "client": "mysql",
+        "host": "localhost",
+        "port": "3306",
+        "user": "root",
+        "password": "",
+        "name": "wiwit"
+    }
+}

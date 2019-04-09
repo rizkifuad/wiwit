@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package proto;
+// Service definition
+service Data {
+  // Get resource id
+  rpc GetResourceId (Request) returns (Response) {}
+}
+
+message Response {
+    string resourceId = 1;
+}
+
+message Request {
+    string userId = 1;
+}
+
