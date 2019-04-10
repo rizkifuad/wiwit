@@ -57,13 +57,24 @@ func (r *UserRepo) ListBy(query model.User, page int, limit int) (users []model.
 	return users
 }
 
-func (r *UserRepo) Update(query model.User, data model.User) model.User {
+func (r *UserRepo) Update(data model.User) model.User {
+	var user model.User
 	r.Conn.
-		Where(query).
-		First(&query)
+		Where("id=?", data.Model.ID).
+		First(&user)
 
-	r.Conn.Model(&query).Update(data)
-	return query
+	r.Conn.Model(&user).Update(data)
+	return user
+}
+
+func (r *UserRepo) UpdateBy(query model.User, data model.User) model.User {
+	var user model.User
+	r.Conn.
+		Where("id=?", data.Model.ID).
+		First(&user)
+
+	r.Conn.Model(&user).Update(data)
+	return user
 }
 
 func (r *UserRepo) Delete(role *model.User) (bool, error) {

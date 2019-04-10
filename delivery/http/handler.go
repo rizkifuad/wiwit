@@ -24,7 +24,7 @@ func New(u controller.UserController, ex controller.ExpenseController) *echo.Ech
 	}
 
 	e.GET("/ping", handler.ping)
-	e.POST("/register", handler.register)
+	e.PUT("/register", handler.register)
 	e.POST("/budget_plan/:user_id", handler.budgetPlan)
 	e.POST("/expense/:user_id", handler.addExpense)
 	e.POST("/expense/check/:user_id", handler.checkExpense)
@@ -85,7 +85,8 @@ func (h *Handler) daily(c echo.Context) error {
 
 func (h *Handler) register(c echo.Context) error {
 	username := c.FormValue("username")
-	sessionID := c.FormValue("session_id")
+	id := c.FormValue("id")
+	sessionID := uuid.New().String()
 	expenseS := c.FormValue("expense")
 	salaryS := c.FormValue("salary")
 	salaryDateS := c.FormValue("salary_date")
@@ -94,15 +95,34 @@ func (h *Handler) register(c echo.Context) error {
 	salaryDate, _ := strconv.Atoi(salaryDateS)
 	salary, _ := strconv.ParseFloat(salaryS, 64)
 
-	user := model.User{
-		Username:   username,
-		SessionID:  sessionID,
-		Expense:    expense, // percentage
-		Salary:     salary,
-		SalaryDate: salaryDate,
+	var response model.User
+	if id == "" {
+		user := model.User{
+			Username:  username,
+			SessionID: sessionID,
+			// Expense:    expense, // percentage
+			// Salary:     salary,
+			// SalaryDate: salaryDate,
+		}
+		response = h.UserController.Register(user)
+	} else {
+		ids := (uuid.MustParse(id))
+		user := model.User{
+			Model: model.Model{
+				ID: &ids,
+			},
+			// Username:  username,
+			// SessionID: sessionID,
+			Expense:    expense, // percentage
+			Salary:     salary,
+			SalaryDate: salaryDate,
+		}
+		// *user.Model.ID = ids
+		response = h.UserController.UpdateRegister(user)
+
 	}
-	userCreated := h.UserController.Register(user)
-	return c.JSON(http.StatusOK, userCreated)
+
+	return c.JSON(http.StatusOK, response)
 }
 
 func (h *Handler) budgetPlan(c echo.Context) error {

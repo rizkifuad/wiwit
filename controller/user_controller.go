@@ -19,10 +19,14 @@ func (c *UserController) Register(user model.User) model.User {
 	return c.UserRepo.Create(user)
 }
 
+func (c *UserController) UpdateRegister(user model.User) model.User {
+	return c.UserRepo.Update(user)
+}
+
 func (c *UserController) GetBy(query model.User) model.User {
 	return c.UserRepo.GetBy(query)
 }
 
 func (c *UserController) Update(query model.User, data model.User) model.User {
-	return c.UserRepo.Update(query, data)
+	return c.UserRepo.UpdateBy(query, data)
 }
