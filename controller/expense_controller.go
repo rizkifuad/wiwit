@@ -44,7 +44,6 @@ func (c *ExpenseController) CheckExpense(user model.User, amount float64) (bool,
 
 	return false, sumMonth - amount
 
-	// return c.ExpenseRepo.Create()
 }
 
 func (c *ExpenseController) AddExpense(user model.User, amount float64, typed string) model.Expense {
@@ -55,6 +54,31 @@ func (c *ExpenseController) AddExpense(user model.User, amount float64, typed st
 	}
 
 	return c.ExpenseRepo.Create(ex)
+}
+
+func (c *ExpenseController) Monthly(user model.User) model.MonthlyResponses {
+	todayDate := time.Now().Day()
+	salaryDate := user.SalaryDate
+
+	// month, _ = strconv.Atoi(time.Now().Month().String())
+
+	expenseMonth := int(time.Now().Month())
+
+	var exEnd time.Time
+
+	if todayDate >= salaryDate {
+		exEnd = time.Date(time.Now().Year(), time.Month(expenseMonth+1), salaryDate, 0, 0, 0, 0, time.UTC)
+	} else {
+		exEnd = time.Date(time.Now().Year(), time.Month(expenseMonth), salaryDate, 0, 0, 0, 0, time.UTC)
+	}
+
+	exStart := exEnd.AddDate(0, -1, 0)
+
+	return c.ExpenseRepo.GetMonthly(user, exStart, exEnd)
+}
+
+func (c *ExpenseController) Daily(user model.User) model.MonthlyResponses {
+	return c.ExpenseRepo.GetDaily(user)
 }
 
 func (c *ExpenseController) List(page int, limit int) []model.Expense {

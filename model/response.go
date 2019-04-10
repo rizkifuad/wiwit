@@ -6,3 +6,14 @@ type ExpenseResponse struct {
 	ExpensePercentage int     `json:"expense_percentage"`
 	TotalExpense      float64 `json:"total_expense"`
 }
+
+type MonthlyResponse struct {
+	Total float64 `json:"total"`
+	Type  string  `json:"type"`
+}
+
+type MonthlyResponses struct {
+	Data              []MonthlyResponse `json:"data"`
+	Total             float64           `json:"total"`
+	ExpensePercentage float64           `json:"expense_percentage"`
+}

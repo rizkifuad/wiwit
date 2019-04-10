@@ -49,6 +49,22 @@ func (r *ExpenseRepo) TotalExpense(userID uuid.UUID, start time.Time, end time.T
 	return total.Total
 }
 
+func (r *ExpenseRepo) TotalExpenseDaily(userID uuid.UUID) float64 {
+	type Result struct {
+		Total float64
+	}
+
+	var total Result
+
+	r.Conn.
+		Table("expenses").
+		Select("sum(amount) total").
+		Where("user_id = ? AND date(created_at) = CURDATE()", userID).
+		Scan(&total)
+
+	return total.Total
+}
+
 func (r *ExpenseRepo) List(page int, limit int) (roles []model.Expense) {
 	r.Conn.
 		Offset((page - 1) * limit).
@@ -56,6 +72,48 @@ func (r *ExpenseRepo) List(page int, limit int) (roles []model.Expense) {
 		Find(&roles)
 
 	return roles
+}
+
+func (r *ExpenseRepo) GetMonthly(user model.User, start time.Time, end time.Time) model.MonthlyResponses {
+
+	var m []model.MonthlyResponse
+	var ms model.MonthlyResponses
+
+	r.Conn.
+		Table("expenses").
+		Select("sum(amount) total, `type`").
+		Where("created_at >= ? AND created_at <= ? AND user_id = ?", start, end, user.Model.ID).
+		Group("type").
+		Scan(&m)
+
+	ms.Data = m
+	ms.Total = r.TotalExpense(*user.Model.ID, start, end)
+
+	batas := float64(user.Expense) / 100.0 * user.Salary
+	ms.ExpensePercentage = ms.Total / batas * 100.0
+
+	return ms
+}
+
+func (r *ExpenseRepo) GetDaily(user model.User) model.MonthlyResponses {
+
+	var m []model.MonthlyResponse
+	var ms model.MonthlyResponses
+
+	r.Conn.
+		Table("expenses").
+		Select("sum(amount) total, type").
+		Where("user_id = ? AND date(created_at) = CURDATE()", user.Model.ID).
+		Group("type").
+		Scan(&m)
+
+	ms.Data = m
+	ms.Total = r.TotalExpenseDaily(*user.Model.ID)
+
+	batas := float64(user.Expense) / 100.0 * user.Salary
+	ms.ExpensePercentage = ms.Total / batas * 100.0
+
+	return ms
 }
 
 func (r *ExpenseRepo) ListBy(query model.Expense, page int, limit int) (users []model.Expense) {

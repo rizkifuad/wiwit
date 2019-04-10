@@ -28,7 +28,8 @@ func New(u controller.UserController, ex controller.ExpenseController) *echo.Ech
 	e.POST("/budget_plan/:user_id", handler.budgetPlan)
 	e.POST("/expense/:user_id", handler.addExpense)
 	e.POST("/expense/check/:user_id", handler.checkExpense)
-	e.POST("/payday", handler.payday)
+	e.POST("/monthly/:user_id", handler.monthly)
+	e.POST("/daily/:user_id", handler.daily)
 
 	return e
 }
@@ -66,8 +67,20 @@ func (h *Handler) addExpense(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 }
 
-func (h *Handler) payday(c echo.Context) error {
-	return c.JSON(http.StatusOK, struct{ Message string }{Message: "success"})
+func (h *Handler) monthly(c echo.Context) error {
+	userIDD := c.Param("user_id")
+	userID := uuid.MustParse(userIDD)
+	user := h.UserController.GetBy(model.User{Model: model.Model{ID: &userID}})
+	response := h.ExpenseController.Monthly(user)
+	return c.JSON(http.StatusOK, response)
+}
+
+func (h *Handler) daily(c echo.Context) error {
+	userIDD := c.Param("user_id")
+	userID := uuid.MustParse(userIDD)
+	user := h.UserController.GetBy(model.User{Model: model.Model{ID: &userID}})
+	response := h.ExpenseController.Daily(user)
+	return c.JSON(http.StatusOK, response)
 }
 
 func (h *Handler) register(c echo.Context) error {
